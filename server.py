@@ -119,6 +119,10 @@ class Server:
         res = prefix + f" {self.server_name} " + dt_str + "{:<15}".format(category) + message
         print(res)
 
+        f = open(self.server_name + ".log", "a")
+        f.write(res)
+        f.close()
+
     def set_account_online(self):
         self.session_api.account.setOnline()
         self.add_log_message("SET-ONLINE", '')

@@ -13,7 +13,7 @@ connection = connect() # db_manager.
 
 
 server2 = ServerActor(
-                api_token=config.vk_api_token2, 
+                api_token=config.vk_api_token, 
                 server_name="my_server", 
                 role='reader', # 'reader'
                 db_connection=connection

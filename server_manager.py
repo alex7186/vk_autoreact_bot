@@ -1,22 +1,33 @@
+# -*- coding: utf-8 -*-
+
 # Импорт класса Server
-from server import Server
+from server_files.server_actor import ServerActor
 # Получение config.py
 import config
 
-from multiprocessing import Process
+from db_manager import connect
+# from multiprocessing import Process
 
-server1 = Server(api_token=config.vk_api_token1, server_name="server1", role='answering')
-server2 = Server(api_token=config.vk_api_token2, server_name="server2", role='deleter')
+connection = connect() # db_manager.
+
+
+
+server2 = ServerActor(
+                api_token=config.vk_api_token2, 
+                server_name="my_server", 
+                role='reader', # 'reader'
+                db_connection=connection
+                )
+
 # vk_api_token - API токен, который мы ранее создали
 # 197901530 - id сообщества-бота
 # "server1" - имя сервера
 # role - функционал сервера
 
 
-bot1 = Process(target=server1.start)
-bot2 = Process(target=server2.start)
+# bot1 = Process(target=server1.start)
+# bot1.start()
+# bot1.join()
 
-bot1.start()
-bot2.start()
-bot1.join()
-bot2.join()
+
+server2.start()
